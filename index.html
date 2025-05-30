@@ -1,106 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-* {box-sizing: border-box}
+    <meta charset="UTF-8" />
+    <title>CRSC Frame</title>
+    <style>
+         .hidden {
+            display:none;
+        }
 
-/* Set height of body and the document to 100% */
-body, html {
-  margin: 0;
-  font-family: Arial;
+        .pressed {
+            background-color: #00584d;
+            color:#ffc842;
+        }
+.unpressed {
+    background-color: grey;
+    color:white;
 }
-
-.flex-cont {
-  justify-content: center;
-  display: flex;
-
-}
-
-/* Style tab links */
-.tablinkM {
-  background-color: grey;
-  color: white;
+        #tglBtn {
   float: left;
   border: none;
   outline: none;
   cursor: pointer;
   padding: 14px 16px;
-  font-size: 17px;
+  font-size: 3vw;
   width: 25%;
-}
-.tablinkB {
-  background-color: grey;
-  color: white;
-  float: left;
+        }
+
+        #tst {
+            float: left;
   border: none;
   outline: none;
   cursor: pointer;
   padding: 14px 16px;
-  font-size: 17px;
+  font-size: 3vw;
   width: 25%;
-}
-
-.tablink:hover {
-  background-color: #777;
-}
-
-/* Style the tab content (and add height:100% for full page content) */
-.tabcontent {
-padding-top:5vw;
-background-color:white;
-  height: 100%;
-}
-
-#Browser {background-color: white;}
-#Mobile {background-color: white;}
-
-</style>
+        }
+    </style>
 </head>
 <body>
-<div class="flex-cont">
-<button class="tablinkB" onclick="openPage('Browser', this, '#00584d' )">Browser</button>
-<button class="tablinkM" onclick="openPage('Mobile', this, '#00584d')" >Mobile</button>
-</div>
-
-<div id="Browser" class="tabcontent">
- <p><iframe src="https://jss37.github.io/CRSC-Board/" style="width:100%;height:80vw;margin:0 auto;border: none;"></iframe></p>
-</div>
-
-<div id="Mobile" class="tabcontent">
-  <p><iframe src="https://jss37.github.io/CRSC-Mobile/" style="width:100%;height:80vw;margin:0 auto;border: none;"></iframe></p>
-</div>
-
-
-
+    <div style="padding-left: 30vw;">
+    <button id="tglBtn" class="pressed" onclick="displayToggle()">Browser</button>
+    <button class="unpressed" id="tst" onclick="displayToggle()">Mobile</button>
+    </div>
+  <iframe src="https://jss37.github.io/CRSC-Mobile/" style="width:100%;height:80vw;margin:0 auto;border: none;" id="mobile" class="hidden"></iframe>
+    <iframe src = "https://jss37.github.io/CRSC-Board/" style="width:100%;height:80vw;margin:0 auto;border: none;" id ="browser"></iframe>
+</body>
 <script>
-function openPage(pageName,elmnt,color) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablink");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].style.backgroundColor = "";
-  }
-  document.getElementById(pageName).style.display = "block";
-  elmnt.style.backgroundColor = color;
+    function displayToggle() {
+    var x = document.getElementById('browser');
+    var z = document.getElementById('mobile');
+    var y = document.getElementById('tglBtn');
+    var b = document.getElementById('tst');
+    x.classList.toggle('hidden');
+    z.classList.toggle('hidden');
+    y.classList.toggle('pressed');
+    y.classList.toggle('unpressed');
+    b.classList.toggle('pressed');
+    b.classList.toggle('unpressed');
 }
 
 
+if (window.matchMedia("(max-width: 700px)").matches) {
+ displayToggle();
+} 
 
-// Set default tab based on device type
-document.addEventListener("DOMContentLoaded", function() {
-  if (detectMobileAndTablet()) {
-    openPage('Mobile', document.querySelector('.tablinkM'),);
-  } else {
-    openPage('Browser', document.querySelector('.tablinkB'),);
-  }
-});
 </script>
-
-
-   
-</body>
-</html> 
+</html>
